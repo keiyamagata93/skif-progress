@@ -1,11 +1,29 @@
 import knex from '../../../knex';
 
 const progressHandler = async (req, res) => {
-	const progress = await knex('users')
-		.join('progress', 'users.progress_id', 'progress.ProgressID')
-		.where('users.progress_id', req.query.id);
+	if (req.method === 'GET') {
+		const progress = await knex('users').where('id', req.query.id);
+		res.json(progress);
+	}
 
-	res.json(progress);
+	if (req.method === 'PUT') {
+		// Get id from query
+		const id = req.query.id;
+		// Get user with id
+		// const result = await knex('users').where('id', id);
+		const data = req.body;
+		// console.log(req.body); // => {kihon: true, kata: true, kumite: false,}
+		const keys = Object.keys(data); // ['kihon', 'kata', 'kumite']
+		const values = Object.values(data); // [true, true, false]
+		const promises = [];
+		values.forEach((value, i) => {
+			if (value) {
+				promises.push(knex('users').where('id', '=', id).increment(keys[i], 1)); // where the value is true gets incremented by 1
+			}
+		});
+		await Promise.all(promises);
+		res.json({ finished: 'OK' });
+	}
 };
 
 export default progressHandler;

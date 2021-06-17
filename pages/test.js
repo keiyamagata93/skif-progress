@@ -7,14 +7,15 @@ const test = () => {
 	const [kumite, setKumite] = useState(false);
 
 	const handleSubmit = async e => {
+		const data = {
+			kihon: kihon,
+			kata: kata,
+			kumite: kumite,
+		};
 		e.preventDefault();
 		const response = await fetch('/api/progress/1', {
 			method: 'PUT',
-			body: JSON.stringify({
-				kihon: kihon ? kihon + 1 : null,
-				kata: kata ? kata + 1 : null,
-				kumite: kumite ? kumite + 1 : null,
-			}),
+			body: JSON.stringify(data),
 			headers: {
 				'Content-Type': 'application/json',
 			},
