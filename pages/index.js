@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { getSession, useSession } from 'next-auth/client';
-import { Flex, Text } from '@chakra-ui/react';
+import { Flex, Heading, Text } from '@chakra-ui/react';
 import NavBar from '../components/NavBar';
 import SignUp from '../components/SignUp';
 import knex from '../knex';
@@ -22,6 +22,7 @@ const Home = ({ categories, users, levels }) => {
 			<Flex w="100%" justifyContent="center" alignItems="center" flexDirection="column">
 				{session && (
 					<>
+						<Heading>Welcome to the SKIF Progress App</Heading>
 						{thisUser.name === null || thisUser.level_id === null ? (
 							<>
 								<Text textAlign="center">
@@ -31,6 +32,7 @@ const Home = ({ categories, users, levels }) => {
 								<SignUp user={thisUser} levels={levels} />
 							</>
 						) : null}
+
 						<Link href={`/user/${thisUser.id}`}>
 							<a>Profile</a>
 						</Link>
