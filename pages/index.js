@@ -20,9 +20,9 @@ const Home = ({ categories, users, levels }) => {
 			</Head>
 			<NavBar categories={categories} />
 			<Flex w="100%" justifyContent="center" alignItems="center" flexDirection="column">
+				<Heading>Welcome to the SKIF Progress App</Heading>
 				{session && (
 					<>
-						<Heading>Welcome to the SKIF Progress App</Heading>
 						{thisUser.name === null || thisUser.level_id === null ? (
 							<>
 								<Text textAlign="center">
