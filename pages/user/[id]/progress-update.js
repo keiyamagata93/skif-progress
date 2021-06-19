@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Box, Button, Checkbox, Flex } from '@chakra-ui/react';
-import NavBar from '../components/NavBar';
-import knex from '../knex';
+import NavBar from '../../../components/NavBar';
+import knex from '../../../knex';
 
-const trainingLog = ({ categories, user }) => {
+const progressUpdate = ({ categories, user }) => {
 	const [kihon, setKihon] = useState(false);
 	const [kata, setKata] = useState(false);
 	const [kumite, setKumite] = useState(false);
@@ -23,7 +23,7 @@ const trainingLog = ({ categories, user }) => {
 			},
 		});
 		const result = await response.json();
-		// console.log(result);
+		console.log(response);
 	};
 
 	return (
@@ -41,16 +41,18 @@ const trainingLog = ({ categories, user }) => {
 	);
 };
 
-export default trainingLog;
+export default progressUpdate;
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async context => {
+	const id = context.query.id;
 	// Query
 	const data1 = await knex.select().from('categories');
-	const data2 = await knex('users').where('email', 'kei.yamagata@me.com');
+	const data2 = await knex('users').where('id', id).first();
 
 	// Send results als props
 	const categories = JSON.parse(JSON.stringify(data1));
 	const user = JSON.parse(JSON.stringify(data2));
+	// console.log(id);
 
 	return {
 		props: {

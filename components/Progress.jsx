@@ -1,9 +1,8 @@
 import Chart from 'react-apexcharts';
 
-const Progress = ({ userData, level, levelid }) => {
+const Progress = ({ user, level, levelid }) => {
 	const points = Math.round(
-		((userData[0].kihon + userData[0].kata + userData[0].kumite) / level[levelid].max_points) *
-			100
+		((user.kihon + user.kata + user.kumite) / level[levelid].max_points) * 100
 	);
 	const series = [points];
 	const options = {
