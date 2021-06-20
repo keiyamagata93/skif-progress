@@ -32,6 +32,18 @@ const options = {
 		password: process.env.DB_PASS,
 		database: process.env.DB_NAME,
 	},
+	callbacks: {
+		/**
+		 * @param  {string} url      URL provided as callback URL by the client
+		 * @param  {string} baseUrl  Default base URL of site (can be used as fallback)
+		 * @return {string}          URL the client will be redirect to
+		 */
+		async redirect(url, baseUrl) {
+			return url.startsWith(baseUrl) ? url : baseUrl;
+		},
+	},
+
+	// debug: true,
 };
 
 export default (req, res) => NextAuth(req, res, options);

@@ -1,10 +1,18 @@
 import Link from 'next/link';
-import { Box, Heading } from '@chakra-ui/react';
+import { Box, Flex, Heading } from '@chakra-ui/react';
 import { slug } from '../helpers';
 
 const ExercisesList = ({ exercises }) => {
 	return (
-		<Box p={16}>
+		<Flex
+			as="main"
+			w="calc(100vw - 2vh - 60px)"
+			flexDirection="column"
+			pos="absolute"
+			top="2vh"
+			left="calc(60px + 2vh)"
+			p="1em"
+			mb={10}>
 			<Heading mb={10}>{exercises[0].categorie}</Heading>
 			<Box as="ul" listStyleType="none" lineHeight="2rem">
 				{exercises.map(ex => (
@@ -15,7 +23,7 @@ const ExercisesList = ({ exercises }) => {
 					</li>
 				))}
 			</Box>
-		</Box>
+		</Flex>
 	);
 };
 

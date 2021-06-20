@@ -4,6 +4,7 @@ const Progress = ({ user, level, levelid }) => {
 	const points = Math.round(
 		((user.kihon + user.kata + user.kumite) / level[levelid].max_points) * 100
 	);
+	console.log(level[levelid]);
 	const series = [points];
 	const options = {
 		chart: {
@@ -25,7 +26,7 @@ const Progress = ({ user, level, levelid }) => {
 
 	return (
 		<>
-			<Chart options={options} series={series} type="radialBar" width={800} />
+			<Chart options={options} series={series} type="radialBar" height={390} />
 		</>
 	);
 };

@@ -5,7 +5,7 @@ import knex from '../knex';
 
 const list = ({ categories, exercises }) => {
 	return (
-		<Flex>
+		<Flex pos="relative">
 			<Navbar categories={categories} />
 			<ExercisesList exercises={exercises} />
 		</Flex>
