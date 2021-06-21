@@ -43,7 +43,7 @@ const options = {
 		},
 	},
 
-	// debug: true,
+	debug: true,
 };
 
 export default (req, res) => NextAuth(req, res, options);

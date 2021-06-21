@@ -9,7 +9,7 @@ import Auth from '../components/Auth';
 import knex from '../knex';
 
 const Home = ({ categories, users, levels }) => {
-	const [session] = useSession();
+	const [session, loading] = useSession();
 	const thisUser = session ? users.filter(user => user.email === session.user.email)[0] : null;
 	// console.log(thisUser);
 
@@ -34,6 +34,7 @@ const Home = ({ categories, users, levels }) => {
 				<Heading as="h1" fontSize={['1.5rem', '2rem', '2.5rem']} mb={10} color="teal.600">
 					SKIF Progress App
 				</Heading>
+				{loading && <Heading>Loading...</Heading>}
 				{session && (
 					<>
 						{thisUser.name === null || thisUser.level_id === null ? (
