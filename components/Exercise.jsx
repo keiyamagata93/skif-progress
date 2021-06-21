@@ -8,13 +8,16 @@ const Exercise = ({ exercise }) => {
 			w="calc(100vw - 2vh - 60px)"
 			h="100vh"
 			flexDirection="column"
+			// align="center"
 			pos="absolute"
 			top="2vh"
 			left="calc(60px + 2vh)"
 			pl={5}>
-			<Heading mb={10}>{exercise.exercise}</Heading>
+			<Heading mb={10} color="teal.600">
+				{exercise.exercise}
+			</Heading>
 			<Text mb={10}>{exercise.description}</Text>
-			<AspectRatio ratio={16 / 9} w={['90%', '100%']}>
+			<AspectRatio ratio={16 / 9} w={['95%', '80%']}>
 				<ReactPlayer
 					url={`https://www.youtube.com/watch?v=${exercise.video_id}`}
 					width="100%"

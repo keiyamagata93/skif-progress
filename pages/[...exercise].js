@@ -19,7 +19,7 @@ export const getServerSideProps = async context => {
 	const id = context.params.exercise[1];
 
 	// Query
-	const data1 = await knex.select().from('categories');
+	const data1 = await knex('categories');
 	const data2 = await knex('exercises').where('exerciseID', parseInt(id)).first();
 
 	// Send result as props

@@ -23,14 +23,14 @@ const Home = ({ categories, users, levels }) => {
 			<NavBar categories={categories} />
 			<Flex
 				w="calc(100vw - 2vh - 60px)"
-				h="100vh"
+				h="98vh"
 				alignItems="center"
 				flexDirection="column"
 				pos="absolute"
 				top="2vh"
 				left="calc(60px + 2vh)"
 				p="1em">
-				<Heading as="h1" fontSize={['1.5rem', '2rem', '2.5rem']} mb={10} color="teal.500">
+				<Heading as="h1" fontSize={['1.5rem', '2rem', '2.5rem']} mb={10} color="teal.600">
 					SKIF Progress App
 				</Heading>
 				{session && (
@@ -43,26 +43,29 @@ const Home = ({ categories, users, levels }) => {
 								</Text>
 								<SignUp user={thisUser} levels={levels} />
 							</>
-						) : null}
-						<Heading fontSize={['1.2rem', '1.7rem', '2rem']} mb={10}>
-							Hi, {thisUser.name}! Welcome back.
-						</Heading>
-						<Button leftIcon={<ChevronRightIcon />}>
-							<Link href={`/user/${thisUser.id}`}>
-								<a>Progress</a>
-							</Link>
-						</Button>
+						) : (
+							<>
+								<Heading fontSize={['1.2rem', '1.7rem', '2rem']} mb={10}>
+									Hi, {thisUser.name}! Welcome back.
+								</Heading>
+								<Button leftIcon={<ChevronRightIcon />}>
+									<Link href={`/user/${thisUser.id}`}>
+										<a>Progress</a>
+									</Link>
+								</Button>
+							</>
+						)}
 					</>
 				)}
 				{!session && (
 					<>
-						<Text textAlign="center" mb={10}>
+						<Text textAlign="center" mb={10} w="50%">
 							Welcome to the Skif progress app! In this application you will be able
 							to search an excercise you want to train by your own. It is also
 							possible to keep your progress of your karate journey after creating an
 							account.
 						</Text>
-						<Text textAlign="center" mb={5}>
+						<Text textAlign="center" mb={5} w="60%">
 							You're not signed in. Please sign in from the link below to be able to
 							save you progress.
 						</Text>
@@ -76,8 +79,8 @@ const Home = ({ categories, users, levels }) => {
 
 export default Home;
 
-export const getServerSideProps = async context => {
-	const session = await getSession(context);
+export const getServerSideProps = async () => {
+	// const session = await getSession(context);
 	// Query
 	const data1 = await knex('categories');
 	const data2 = await knex('users');
@@ -91,7 +94,7 @@ export const getServerSideProps = async context => {
 
 	return {
 		props: {
-			session,
+			// session,
 			categories,
 			users,
 			levels,

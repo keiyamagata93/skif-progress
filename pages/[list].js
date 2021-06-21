@@ -17,7 +17,7 @@ export default list;
 export const getServerSideProps = async context => {
 	const categorieName = context.params.list;
 	// Query
-	const data1 = await knex.select().from('categories');
+	const data1 = await knex('categories');
 	const data2 = await knex('exercises')
 		.join('categories', 'exercises.categories_id', 'categories.categorieID')
 		// .join('levels', 'exercises.levels_id', 'levels.levelID')

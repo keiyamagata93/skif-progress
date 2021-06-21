@@ -1,37 +1,56 @@
 import React from 'react';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
-import { Button, Flex, Heading } from '@chakra-ui/react';
+import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react';
 import { AddIcon } from '@chakra-ui/icons';
 import Navbar from '../../../components/NavBar';
 import knex from '../../../knex';
+import { useSession } from 'next-auth/client';
 
 const Progress = dynamic(() => import('../../../components/Progress'), { ssr: false });
 
 const user = ({ categories, user, level }) => {
+	const [session] = useSession();
 	return (
 		<Flex>
 			<Navbar categories={categories} />
-			<Flex
-				as="main"
-				w="calc(100vw - 2vh - 60px)"
-				h={['100vh', '110vh']}
-				justifyContent="center"
-				alignItems="center"
-				flexDirection="column"
-				pos="absolute"
-				top="2vh"
-				left="calc(60px + 2vh)">
-				<Heading as="h1" fontSize={['1.5rem', '2rem']}>
-					{user.name}
-				</Heading>
-				<Progress user={user} level={level} levelid={user.level_id} />
-				<Link href={`/user/${user.id}/progress-update`}>
-					<Button leftIcon={<AddIcon />} m={17}>
-						Update Progress
-					</Button>
-				</Link>
-			</Flex>
+			{session ? (
+				<Flex
+					as="main"
+					w="calc(100vw - 2vh - 60px)"
+					h="98vh"
+					justifyContent="center"
+					alignItems="center"
+					flexDirection="column"
+					pos="absolute"
+					top="2vh"
+					left="calc(60px + 2vh)">
+					<Heading as="h1" fontSize={['1.5rem', '2rem', '2.5rem']} color="teal.600">
+						{user.name} / {level[user.level_id - 1].level}
+					</Heading>
+					<Progress user={user} level={level} levelid={user.level_id} />
+					<Box mt={5}>
+						<Link href={`/user/${user.id}/progress-update`}>
+							<Button leftIcon={<AddIcon />} m={17}>
+								Update Progress
+							</Button>
+						</Link>
+					</Box>
+				</Flex>
+			) : (
+				<Flex
+					as="main"
+					w="calc(100vw - 2vh - 60px)"
+					h="98vh"
+					justifyContent="center"
+					alignItems="center"
+					flexDirection="column"
+					pos="absolute"
+					top="2vh"
+					left="calc(60px + 2vh)">
+					<Heading>You're not signed in</Heading>
+				</Flex>
+			)}
 		</Flex>
 	);
 };

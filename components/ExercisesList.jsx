@@ -8,12 +8,15 @@ const ExercisesList = ({ exercises }) => {
 			as="main"
 			w="calc(100vw - 2vh - 60px)"
 			flexDirection="column"
+			// align="center"
 			pos="absolute"
 			top="2vh"
 			left="calc(60px + 2vh)"
 			p="1em"
 			mb={10}>
-			<Heading mb={10}>{exercises[0].categorie}</Heading>
+			<Heading mb={10} color="teal.600">
+				{exercises[0].categorie}
+			</Heading>
 			<Box as="ul" listStyleType="none" lineHeight="2rem">
 				{exercises.map(ex => (
 					<li key={ex.exerciseID}>

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { Box, Button, Input, Select } from '@chakra-ui/react';
+import { Box, Button, Input, Select, Text } from '@chakra-ui/react';
+import Modal from '../components/Modal';
 
 const SignUp = ({ user, levels }) => {
 	const [name, setName] = useState('');
 	const [level, setLevel] = useState(1);
+	const buttonText = 'Go';
 
 	const handleSubmit = async e => {
 		const data = {
@@ -22,20 +24,23 @@ const SignUp = ({ user, levels }) => {
 			},
 		});
 		const result = await response.json();
-		// console.log(result);
+		console.log(result);
 	};
 
 	return (
-		<Box>
-			<form onSubmit={handleSubmit}>
-				<Input placeholder="Name" onChange={e => setName(e.target.value)} />
-				<Select placeholder="Level" onChange={e => setLevel(e.target.value)}>
-					{levels.map(level => (
-						<option value={level.levelID}>{level.level}</option>
-					))}
-				</Select>
-				<Button type="submit">Submit</Button>
-			</form>
+		<Box as="form" onSubmit={handleSubmit} mt={10}>
+			<Text mb={1}>Name:</Text>
+			<Input onChange={e => setName(e.target.value)} isRequired={user.name === null} />
+			<Text mt={5} mb={1}>
+				Level:
+			</Text>
+			<Select onChange={e => setLevel(e.target.value)} mb={5}>
+				{levels.map(level => (
+					<option value={level.levelID}>{level.level}</option>
+				))}
+			</Select>
+			{/* <Button type="submit">Submit</Button> */}
+			<Modal id={user.id} buttonText={buttonText} />
 		</Box>
 	);
 };
