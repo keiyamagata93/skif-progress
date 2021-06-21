@@ -42,13 +42,8 @@ const options = {
 		async redirect(url, baseUrl) {
 			return url.startsWith(baseUrl) ? url : baseUrl;
 		},
-		signIn(user, account, profile) {
-			user.name = slug(user.email.slice(0, user.email.indexOf('@'))); // or whatever else
-
-			return true;
-		},
 	},
-
+	theme: 'light',
 	debug: true,
 };
 
