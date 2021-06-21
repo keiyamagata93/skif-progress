@@ -24,6 +24,7 @@ const Home = ({ categories, users, levels }) => {
 			<Flex
 				w="calc(100vw - 2vh - 60px)"
 				h="98vh"
+				justifyContent="center"
 				alignItems="center"
 				flexDirection="column"
 				pos="absolute"
