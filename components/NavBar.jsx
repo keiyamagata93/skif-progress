@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import NextLink from 'next/link';
-import { Box, IconButton, Flex, Text } from '@chakra-ui/react';
+import { Box, IconButton, Flex } from '@chakra-ui/react';
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
 import Auth from './Auth';
 import { slug } from '../helpers';
@@ -48,7 +48,7 @@ const NavBar = ({ categories }) => {
 					mt={10}>
 					<li>
 						<NextLink href="/">
-							<Text>Home</Text>
+							<a>Home</a>
 						</NextLink>
 					</li>
 					{categories.map(cat => (
