@@ -14,7 +14,7 @@ const Home = ({ categories, users, levels }) => {
 	// console.log(thisUser);
 
 	return (
-		<Flex h="100vh">
+		<Flex>
 			<NavBar categories={categories} />
 			<Flex w="100%" alignItems="center" flexDirection="column" p="1em">
 				<Flex alignItems="center" mb={10}>
@@ -38,7 +38,7 @@ const Home = ({ categories, users, levels }) => {
 						)}
 					</>
 				)}
-				<AspectRatio ratio={16 / 9} w={['100%', '80%', '70%', '60%']} mb={10}>
+				<AspectRatio ratio={16 / 9} w={['100%', '80%', '70%', '60%']} mb={100}>
 					<ReactPlayer
 						url={`https://www.youtube.com/watch?v=k5dnYW-2pFE`}
 						width="100%"
