@@ -14,13 +14,12 @@ const list = ({ categories, exercises }) => {
 
 export default list;
 
-export const getStaticProps = async context => {
+export const getServerSideProps = async context => {
 	const categorieName = context.params.list;
 	// Query
 	const data1 = await knex('categories');
 	const data2 = await knex('exercises')
 		.join('categories', 'exercises.categories_id', 'categories.categorieID')
-		// .join('levels', 'exercises.levels_id', 'levels.levelID')
 		.select(
 			'exercises.exerciseID',
 			'exercises.exercise',
@@ -28,8 +27,6 @@ export const getStaticProps = async context => {
 			'exercises.video_id',
 			'categories.categorieID',
 			'categories.categorie'
-			// 'levels.levelID',
-			// 'levels.level'
 		)
 		.where('categories.categorie', categorieName);
 	// Send results als props

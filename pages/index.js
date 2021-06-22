@@ -32,12 +32,16 @@ const Home = ({ categories, users, levels }) => {
 				top="2vh"
 				left="calc(60px + 2vh)"
 				p="1em">
-					<Flex alignItems='center' mb={10}>
-						<Image src='/images/skif-logo.png' width={100} height={100} />
-						<Heading as="h1" fontSize={['1.5rem', '2rem', '2.5rem']} color="teal.600" ml={5}>
-							SKIF Progress App
-						</Heading>
-					</Flex>
+				<Flex alignItems="center" mb={10}>
+					<Image src="/images/skif-logo.png" width={100} height={100} />
+					<Heading
+						as="h1"
+						fontSize={['1.5rem', '2rem', '2.5rem']}
+						color="teal.600"
+						ml={5}>
+						SKIF Progress App
+					</Heading>
+				</Flex>
 				{loading && <Spinner />}
 				{session && (
 					<>
@@ -65,13 +69,13 @@ const Home = ({ categories, users, levels }) => {
 				)}
 				{!session && !loading && (
 					<>
-						<Text textAlign="center" mb={10} w="50%">
+						<Text textAlign="center" mb={10} w={['80%', '70%', '60%']}>
 							Welcome to the Skif progress app! In this application you will be able
 							to search an excercise you want to train by your own. It is also
 							possible to keep your progress of your karate journey after creating an
 							account.
 						</Text>
-						<Text textAlign="center" mb={5} w="60%">
+						<Text textAlign="center" mb={5} w={['80%', '70%', '60%']}>
 							You're not signed in. Please sign in from the link below to be able to
 							save you progress.
 						</Text>

@@ -12,12 +12,11 @@ const ExercisesList = ({ exercises }) => {
 			pos="absolute"
 			top="2vh"
 			left="calc(60px + 2vh)"
-			p="1em 0 2em 5em"
-			mb={10}>
+			pl={['1em', '3em']}>
 			<Heading mb={10} color="teal.600">
 				{exercises[0].categorie}
 			</Heading>
-			<Box as="ul" listStyleType="none" lineHeight="2rem">
+			<Box as="ul" listStyleType="none" lineHeight="2rem" mb={20}>
 				{exercises.map(ex => (
 					<li key={ex.exerciseID}>
 						<Link href={`/${slug(ex.categorie)}/${ex.exerciseID}/${slug(ex.exercise)}`}>

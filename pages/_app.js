@@ -5,9 +5,9 @@ import { Provider } from 'next-auth/client';
 
 const MyApp = ({ Component, pageProps }) => {
 	const breakpoints = createBreakpoints({
-		sm: '325px',
-		md: '768px',
-		lg: '960px',
+		sm: '326px',
+		md: '769px',
+		lg: '961px',
 		xl: '1200px',
 	});
 

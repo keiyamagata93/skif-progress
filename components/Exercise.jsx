@@ -12,12 +12,13 @@ const Exercise = ({ exercise }) => {
 			pos="absolute"
 			top="2vh"
 			left="calc(60px + 2vh)"
-			p={['1em 0 2em 1em', '1em 0 2em 5em']}>
+			pt={10}
+			pl={['1em', '2em', '4em']}>
 			<Heading mb={10} color="teal.600">
 				{exercise.exercise}
 			</Heading>
 			<Text mb={10}>{exercise.description}</Text>
-			<AspectRatio ratio={16 / 9} w={['95%', '80%']}>
+			<AspectRatio ratio={16 / 9} w={['95%', '90%']}>
 				<ReactPlayer
 					url={`https://www.youtube.com/watch?v=${exercise.video_id}`}
 					width="100%"
