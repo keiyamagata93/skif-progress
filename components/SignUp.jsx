@@ -6,6 +6,7 @@ const SignUp = ({ user, levels }) => {
 	const [name, setName] = useState('');
 	const [level, setLevel] = useState(1);
 	const buttonText = 'Go';
+	const submitText = 'Submit'
 
 	const handleSubmit = async e => {
 		const data = {
@@ -29,18 +30,16 @@ const SignUp = ({ user, levels }) => {
 
 	return (
 		<Box as="form" onSubmit={handleSubmit} mt={10}>
-			<Text mb={1}>Name:</Text>
-			<Input onChange={e => setName(e.target.value)} isRequired={user.name === null} />
-			<Text mt={5} mb={1}>
-				Level:
-			</Text>
+			<Text mb={1} textAlign='center'>Name</Text>
+			<Input onChange={e => setName(e.target.value)} isRequired={user.name === null} textAlign='center'/>
+			<Text mt={5} mb={1} textAlign='center'>Level</Text>
 			<Select onChange={e => setLevel(e.target.value)} mb={5}>
 				{levels.map(level => (
 					<option value={level.levelID}>{level.level}</option>
 				))}
 			</Select>
 			{/* <Button type="submit">Submit</Button> */}
-			<Modal id={user.id} buttonText={buttonText} />
+			<Modal id={user.id} buttonText={buttonText} submitText={submitText} />
 		</Box>
 	);
 };

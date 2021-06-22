@@ -14,7 +14,7 @@ const exercise = ({ categories, exercise }) => {
 
 export default exercise;
 
-export const getServerSideProps = async context => {
+export const getStaticProps = async context => {
 	// Select id from context
 	const id = context.params.exercise[1];
 

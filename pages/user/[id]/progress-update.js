@@ -12,6 +12,9 @@ const progressUpdate = ({ categories, user }) => {
 	const [kata, setKata] = useState(false);
 	const [kumite, setKumite] = useState(false);
 
+	const submitText = 'Submit'
+	const buttonText = 'Back'
+
 	const handleSubmit = async e => {
 		const data = {
 			kihon: kihon,
@@ -27,7 +30,7 @@ const progressUpdate = ({ categories, user }) => {
 			},
 		});
 		const result = await response.json();
-		console.log(response);
+		console.log(result);
 	};
 
 	return (
@@ -59,7 +62,7 @@ const progressUpdate = ({ categories, user }) => {
 							</Checkbox>
 							<Checkbox onChange={() => setKumite(!kumite)}>Kumite</Checkbox>
 						</Flex>
-						<Modal id={user.id} />
+						<Modal id={user.id} submitText={submitText} buttonText={buttonText}/>
 					</Flex>
 				</Flex>
 			) : (

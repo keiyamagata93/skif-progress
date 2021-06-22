@@ -10,13 +10,13 @@ import {
 	useDisclosure,
 } from '@chakra-ui/react';
 
-const BasicModal = ({ id, buttonText }) => {
+const BasicModal = ({ id, buttonText, submitText }) => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const router = useRouter();
 	return (
 		<>
-			<Button type="submit" onClick={onOpen}>
-				Submit
+			<Button type="submit" onClick={onOpen} w='100%'>
+				{submitText}
 			</Button>
 
 			<Modal isOpen={isOpen} onClose={onClose} closeOnOverlayClick={false} isCentered>

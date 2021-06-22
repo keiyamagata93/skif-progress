@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react';
 import { AddIcon } from '@chakra-ui/icons';
 import Navbar from '../../../components/NavBar';
+import Modal from '../../../components/Modal';
 import knex from '../../../knex';
 import { useSession } from 'next-auth/client';
 
@@ -11,6 +12,31 @@ const Progress = dynamic(() => import('../../../components/Progress'), { ssr: fa
 
 const user = ({ categories, user, level }) => {
 	const [session] = useSession();
+	
+	const levelMax = ((user.kihon + user.kata + user.kumite) / level[user.level_id - 1].max_points > .9999) ? true : false
+	
+	const submitText = 'Level up!'
+	const buttonText = 'Back'
+
+	const submitLevelUp = async (e) => {
+		const data = {
+			level_id: user.level_id + 1,
+			kihon: 0,
+			kata: 0,
+			kumite: 0,
+		};
+		e.preventDefault();
+		const response = await fetch(`/api/user/${user.id}`, {
+			method: 'PUT',
+			body: JSON.stringify(data),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		});
+		const result = await response.json();
+		console.log(result);
+	}
+
 	return (
 		<Flex>
 			<Navbar categories={categories} />
@@ -29,13 +55,17 @@ const user = ({ categories, user, level }) => {
 						{user.name} / {level[user.level_id - 1].level}
 					</Heading>
 					<Progress user={user} level={level} levelid={user.level_id} />
-					<Box mt={5}>
+					<Flex mt={10}>
 						<Link href={`/user/${user.id}/progress-update`}>
-							<Button leftIcon={<AddIcon />} m={17}>
+							<Button leftIcon={<AddIcon />}>
 								Update Progress
 							</Button>
 						</Link>
-					</Box>
+						{ levelMax && <Box as='form' onSubmit={submitLevelUp} ml={5}> 
+							{/* <Button type='submit' leftIcon={<AddIcon />}>Level up!</Button> */}
+							<Modal id={user.id} submitText={submitText}/>
+						</Box>}
+					</Flex>
 				</Flex>
 			) : (
 				<Flex

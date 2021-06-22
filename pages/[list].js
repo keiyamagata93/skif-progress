@@ -5,7 +5,7 @@ import knex from '../knex';
 
 const list = ({ categories, exercises }) => {
 	return (
-		<Flex pos="relative">
+		<Flex>
 			<Navbar categories={categories} />
 			<ExercisesList exercises={exercises} />
 		</Flex>
@@ -14,7 +14,7 @@ const list = ({ categories, exercises }) => {
 
 export default list;
 
-export const getServerSideProps = async context => {
+export const getStaticProps = async context => {
 	const categorieName = context.params.list;
 	// Query
 	const data1 = await knex('categories');
