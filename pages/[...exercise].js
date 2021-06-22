@@ -20,11 +20,15 @@ export const getServerSideProps = async context => {
 
 	// Query
 	const data1 = await knex('categories');
-	const data2 = await knex('exercises').where('exerciseID', parseInt(id)).first();
+	const data2 = await knex('exercises')
+		.join('categories', 'exercises.categories_id', 'categories.categorieID')
+		.where('exerciseID', parseInt(id))
+		.first();
 
 	// Send result as props
 	const categories = JSON.parse(JSON.stringify(data1));
 	const exercise = JSON.parse(JSON.stringify(data2));
+	console.log(exercise);
 
 	return {
 		props: {

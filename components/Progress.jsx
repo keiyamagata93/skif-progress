@@ -1,8 +1,9 @@
 import Chart from 'react-apexcharts';
+import { useMediaQuery } from '@chakra-ui/react';
 
 const Progress = ({ user, level, levelid }) => {
 	const points = Math.round(
-		((user.kihon + user.kata + user.kumite) / level[levelid-1].max_points) * 100
+		((user.kihon + user.kata + user.kumite) / level[levelid - 1].max_points) * 100
 	);
 
 	const series = [points];
@@ -28,8 +29,9 @@ const Progress = ({ user, level, levelid }) => {
 	} else if (width > 425 && width < 1441) {
 		height = 500;
 	} else {
-		height = 1000;
+		height = 700;
 	}
+	console.log(height);
 
 	return (
 		<>

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Box, Button, Checkbox, Flex, Heading } from '@chakra-ui/react';
+import { Checkbox, Flex, Heading } from '@chakra-ui/react';
 import NavBar from '../../../components/NavBar';
 import Modal from '../../../components/Modal';
 import knex from '../../../knex';
 import { useSession } from 'next-auth/client';
+import NotSignedIn from '../../../components/NotSignedIn';
 
 const progressUpdate = ({ categories, user }) => {
 	const [session] = useSession();
@@ -12,8 +13,8 @@ const progressUpdate = ({ categories, user }) => {
 	const [kata, setKata] = useState(false);
 	const [kumite, setKumite] = useState(false);
 
-	const submitText = 'Submit'
-	const buttonText = 'Back'
+	const submitText = 'Submit';
+	const buttonText = 'Back';
 
 	const handleSubmit = async e => {
 		const data = {
@@ -62,22 +63,11 @@ const progressUpdate = ({ categories, user }) => {
 							</Checkbox>
 							<Checkbox onChange={() => setKumite(!kumite)}>Kumite</Checkbox>
 						</Flex>
-						<Modal id={user.id} submitText={submitText} buttonText={buttonText}/>
+						<Modal id={user.id} submitText={submitText} buttonText={buttonText} />
 					</Flex>
 				</Flex>
 			) : (
-				<Flex
-					as="main"
-					w="calc(100vw - 2vh - 60px)"
-					h="98vh"
-					justifyContent="center"
-					alignItems="center"
-					flexDirection="column"
-					pos="absolute"
-					top="2vh"
-					left="calc(60px + 2vh)">
-					<Heading>You're not signed in</Heading>
-				</Flex>
+				<NotSignedIn />
 			)}
 		</Flex>
 	);

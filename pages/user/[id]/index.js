@@ -7,18 +7,22 @@ import Navbar from '../../../components/NavBar';
 import Modal from '../../../components/Modal';
 import knex from '../../../knex';
 import { useSession } from 'next-auth/client';
+import NotSignedIn from '../../../components/NotSignedIn';
 
 const Progress = dynamic(() => import('../../../components/Progress'), { ssr: false });
 
 const user = ({ categories, user, level }) => {
 	const [session] = useSession();
-	
-	const levelMax = ((user.kihon + user.kata + user.kumite) / level[user.level_id - 1].max_points > .9999) ? true : false
-	
-	const submitText = 'Level up!'
-	const buttonText = 'Back'
 
-	const submitLevelUp = async (e) => {
+	const levelMax =
+		(user.kihon + user.kata + user.kumite) / level[user.level_id - 1].max_points > 0.9999
+			? true
+			: false;
+
+	const submitText = 'Level up!';
+	const buttonText = 'Back';
+
+	const submitLevelUp = async e => {
 		const data = {
 			level_id: user.level_id + 1,
 			kihon: 0,
@@ -35,7 +39,7 @@ const user = ({ categories, user, level }) => {
 		});
 		const result = await response.json();
 		console.log(result);
-	}
+	};
 
 	return (
 		<Flex>
@@ -50,36 +54,29 @@ const user = ({ categories, user, level }) => {
 					flexDirection="column"
 					pos="absolute"
 					top="2vh"
-					left="calc(60px + 2vh)">
+					left="calc(60px + 2vh)"
+					pl={[7]}>
 					<Heading as="h1" fontSize={['1.5rem', '2rem', '2.5rem']} color="teal.600">
 						{user.name} / {level[user.level_id - 1].level}
 					</Heading>
 					<Progress user={user} level={level} levelid={user.level_id} />
 					<Flex mt={10}>
 						<Link href={`/user/${user.id}/progress-update`}>
-							<Button leftIcon={<AddIcon />}>
-								Update Progress
-							</Button>
+							<Button leftIcon={<AddIcon />}>Update Progress</Button>
 						</Link>
-						{ levelMax && <Box as='form' onSubmit={submitLevelUp} ml={5}> 
-							{/* <Button type='submit' leftIcon={<AddIcon />}>Level up!</Button> */}
-							<Modal id={user.id} submitText={submitText}/>
-						</Box>}
+						{levelMax && (
+							<Box as="form" onSubmit={submitLevelUp} ml={5}>
+								<Modal
+									id={user.id}
+									submitText={submitText}
+									buttonText={buttonText}
+								/>
+							</Box>
+						)}
 					</Flex>
 				</Flex>
 			) : (
-				<Flex
-					as="main"
-					w="calc(100vw - 2vh - 60px)"
-					h="98vh"
-					justifyContent="center"
-					alignItems="center"
-					flexDirection="column"
-					pos="absolute"
-					top="2vh"
-					left="calc(60px + 2vh)">
-					<Heading>You're not signed in</Heading>
-				</Flex>
+				<NotSignedIn />
 			)}
 		</Flex>
 	);

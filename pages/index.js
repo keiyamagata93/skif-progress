@@ -1,13 +1,13 @@
 import Head from 'next/head';
-import Link from 'next/link';
 import Image from 'next/image';
 import { useSession } from 'next-auth/client';
-import { Box, Button, Flex, Heading, Text, Spinner } from '@chakra-ui/react';
-import { ChevronRightIcon } from '@chakra-ui/icons';
+import { AspectRatio, Flex, Heading, Spinner } from '@chakra-ui/react';
 import NavBar from '../components/NavBar';
 import SignUp from '../components/SignUp';
-import Auth from '../components/Auth';
+import Welcome from '../components/Welcome';
+import ToProfile from '../components/ToProfile';
 import knex from '../knex';
+import ReactPlayer from 'react-player/youtube';
 
 const Home = ({ categories, users, levels }) => {
 	const [session, loading] = useSession();
@@ -24,8 +24,6 @@ const Home = ({ categories, users, levels }) => {
 			<NavBar categories={categories} />
 			<Flex
 				w="calc(100vw - 2vh - 60px)"
-				h="98vh"
-				justifyContent="center"
 				alignItems="center"
 				flexDirection="column"
 				pos="absolute"
@@ -42,48 +40,25 @@ const Home = ({ categories, users, levels }) => {
 						SKIF Progress App
 					</Heading>
 				</Flex>
-				{loading && <Spinner />}
 				{session && (
 					<>
 						{thisUser.name === null || thisUser.level_id === null ? (
-							<>
-								<Text textAlign="center">
-									Thank you for using the SKIF Progress App! <br />
-									It seems like you don't have an account yet. Register here.
-								</Text>
-								<SignUp user={thisUser} levels={levels} />
-							</>
+							<SignUp user={thisUser} levels={levels} />
 						) : (
-							<>
-								<Heading fontSize={['1.2rem', '1.7rem', '2rem']} mb={10}>
-									Hi, {thisUser.name}! Welcome back.
-								</Heading>
-								<Button leftIcon={<ChevronRightIcon />}>
-									<Link href={`/user/${thisUser.id}`}>
-										<a>Progress</a>
-									</Link>
-								</Button>
-							</>
+							<ToProfile user={thisUser} />
 						)}
 					</>
 				)}
-				{!session && !loading && (
-					<>
-						<Text textAlign="center" mb={10} w={['80%', '70%', '60%']}>
-							Welcome to the Skif progress app! In this application you will be able
-							to search an excercise you want to train by your own. It is also
-							possible to keep your progress of your karate journey after creating an
-							account.
-						</Text>
-						<Text textAlign="center" mb={5} w={['80%', '70%', '60%']}>
-							You're not signed in. Please sign in from the link below to be able to
-							save you progress.
-						</Text>
-						<Box>
-							<Auth />
-						</Box>
-					</>
-				)}
+				<AspectRatio ratio={16 / 9} w={['100%', '80%', '70%', '60%']} mb={10}>
+					<ReactPlayer
+						url={`https://www.youtube.com/watch?v=k5dnYW-2pFE`}
+						width="100%"
+						height="100%"
+						controls={true}
+					/>
+				</AspectRatio>
+				{loading && <Spinner />}
+				{!session && !loading && <Welcome />}
 			</Flex>
 		</Flex>
 	);
