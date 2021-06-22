@@ -25,7 +25,7 @@ const Progress = ({ user, level, levelid }) => {
 
 	if (width < 426) {
 		height = 390;
-	} else if (width > 425 && width < 1440) {
+	} else if (width > 425 && width < 1441) {
 		height = 500;
 	} else {
 		height = 1000;

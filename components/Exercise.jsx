@@ -12,7 +12,7 @@ const Exercise = ({ exercise }) => {
 			pos="absolute"
 			top="2vh"
 			left="calc(60px + 2vh)"
-			pl={5}>
+			p={['1em 0 2em 1em', '1em 0 2em 5em']}>
 			<Heading mb={10} color="teal.600">
 				{exercise.exercise}
 			</Heading>

@@ -12,7 +12,7 @@ const ExercisesList = ({ exercises }) => {
 			pos="absolute"
 			top="2vh"
 			left="calc(60px + 2vh)"
-			p="1em"
+			p="1em 0 2em 5em"
 			mb={10}>
 			<Heading mb={10} color="teal.600">
 				{exercises[0].categorie}

@@ -8,6 +8,7 @@ const Auth = () => {
 		<>
 			{!session && (
 				<Button
+					w="100%"
 					onClick={() => {
 						signIn();
 					}}>
@@ -16,6 +17,7 @@ const Auth = () => {
 			)}
 			{session && (
 				<Button
+					w="100%"
 					onClick={() => {
 						signOut();
 					}}>
